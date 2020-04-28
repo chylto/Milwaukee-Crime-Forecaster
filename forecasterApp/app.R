@@ -10,7 +10,15 @@
 library(shiny)
 #library(forecast)
 library(ks)
+library(ggplot2)
+
 df <-read.csv('cleanedData.csv')
+
+df <-na.omit(read.csv('cleanedData.csv'))
+df <- df[df$y_lat>42.9,]
+df<- df[df$y_lat<43.2,]
+df<-df[df$x_lng>-88.08,]
+
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -39,17 +47,18 @@ ui <- fluidPage(
 server <- function(input, output) {
     
     output$plot <- renderPlot({
+        
+        
         df1<-df[df$yearN==input$year,]
         df1<-rbind(df1,df[df$monthN==input$month,])
         df1<-rbind(df1,df[df$dayN==input$day,])
+      
+        #k<-kde(x=c(df1$x_lng,df1$y_lat))
+        #print(summary(k))
         
-        summary(df1)
+        #plot(x=df1$x_lng, y=df1$y_lat,)
         
-        
-        k<-kde(x=c(df1$x_lng, df1$ylat))
-        print(summary(k))
-        
-        plot(k)
+        ggplot(df1,aes(x=x_lng,y=y_lat,shape=j_finding,color=j_finding))+geom_point()
     })
     
 }
