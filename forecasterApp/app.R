@@ -58,7 +58,9 @@ server <- function(input, output) {
         
         #plot(x=df1$x_lng, y=df1$y_lat,)
         
-        ggplot(df1,aes(x=x_lng,y=y_lat,shape=j_finding,color=j_finding))+geom_point()
+        #ggplot(df1,aes(x=x_lng,y=y_lat,shape=j_finding,color=j_finding))+geom_point()
+        #heatmap(df1$x_lng,df1$y_lat)
+        ggplot(df1,aes(x=x_lng,y=y_lat))+xlim(-88.072,-87.86)+ylim(42.92,43.2)+geom_point(color="blue") + geom_density_2d(color="black",size=1)+coord_fixed()
     })
     
 }
