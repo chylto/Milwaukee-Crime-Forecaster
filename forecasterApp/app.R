@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(shinythemes)
 #library(forecast)
 library(ks)
 library(ggplot2)
@@ -22,6 +23,7 @@ df<-df[df$x_lng>-88.08,]
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  theme= shinytheme("superhero"),
     
     # Application3 title
     titlePanel("Milwaukee Crime Forecaster"),
@@ -29,6 +31,7 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
+          "Select Day of Interest",
             selectInput("month", "Month:", c("January"=1,"February"=2,"March"=3,"April"=4,"May"=5,"June"=6,"July"=7,"August"=8,"September"=9,"October"=10,"November"=11,"December"=12)),
             selectInput("day", "Day", c(1:31)),
             selectInput("year", "Year:", c(2009:2014))
