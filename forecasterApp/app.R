@@ -6,11 +6,13 @@
 #
 #    http://shiny.rstudio.com/
 #
-
+#install.packages(c("leaflet","sp"))
+#library(leaflet)
 library(shiny)
 library(shinythemes)
 #library(forecast)
 library(ks)
+#library(sp)
 library(ggplot2)
 
 df <-read.csv('cleanedData.csv')
@@ -55,7 +57,8 @@ server <- function(input, output) {
         df1<-df[df$yearN==input$year,]
         df1<-rbind(df1,df[df$monthN==input$month,])
         df1<-rbind(df1,df[df$dayN==input$day,])
-      
+        #leaflet (df) %>% addMarkers() %>% addTiles()
+        #coordinates(df1) <- df1$x_lng+df1$y_lat
         #k<-kde(x=c(df1$x_lng,df1$y_lat))
         #print(summary(k))
         
@@ -63,7 +66,7 @@ server <- function(input, output) {
         
         #ggplot(df1,aes(x=x_lng,y=y_lat,shape=j_finding,color=j_finding))+geom_point()
         #heatmap(df1$x_lng,df1$y_lat)
-        ggplot(df1,aes(x=x_lng,y=y_lat))+xlim(-88.072,-87.86)+ylim(42.92,43.2)+geom_point(color="blue") + geom_density_2d(color="black",size=1)+coord_fixed()
+        ggplot(df1,aes(x=x_lng,y=y_lat))+ylab("Latitude")+xlab("Longitude")+xlim(-88.072,-87.86)+ylim(42.92,43.2)+geom_point(color="red") + geom_density_2d(color="black",size=1)+coord_fixed()
     })
     
 }
