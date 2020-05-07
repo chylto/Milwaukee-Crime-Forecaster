@@ -8,6 +8,11 @@
 #
 #install.packages(c("leaflet","sp"))
 #library(leaflet)
+
+install.packages(c("maps", "mapdata"))
+
+library(maps)
+library(mapdata)
 library(shiny)
 library(shinythemes)
 #library(forecast)
